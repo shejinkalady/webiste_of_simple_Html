@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080a0c">
+  <meta name="description" content="Meet the AERON GT — all-electric performance, designed to move you.">
+  <title>AERON GT — Feel the future</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      color-scheme: dark;
+      --bg: #080b0a;
+      --surface: #101613;
+      --text: #f2f2ef;
+      --muted: #93999b;
+      --accent: #c6ed86;
+      --line: rgba(255, 255, 255, .12);
+      --car-color: #a8bbac;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 50% 29%, rgba(55, 77, 59, .17), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .page-shell {
+      width: min(1600px, 100%);
+      margin: 0 auto;
+      overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,.035);
+      border-left: 1px solid rgba(255,255,255,.035);
+    }
+    .topbar {
+      position: relative;
+      z-index: 5;
+      height: 86px;
+      padding: 0 7.2%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+      background: rgba(8,11,10,.7);
+      backdrop-filter: blur(18px);
+    }
+    .brand {
+      font: 800 20px "Manrope", sans-serif;
+      letter-spacing: .22em;
+    }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 38px; color: #c2c5c3; font-size: 11px; letter-spacing: .035em; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      padding: 12px 18px;
+      border: 1px solid rgba(198,237,134,.43);
+      border-radius: 2px;
+      color: var(--text);
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-cta:hover { background: var(--accent); color: #11150c; }
+    .hero {
+      position: relative;
+      min-height: 740px;
+      padding: 94px 7.2% 0;
+      isolation: isolate;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      width: min(1080px, 96vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      top: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(166,203,156,.13), rgba(101,140,103,.055) 38%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      opacity: .17;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 92px 92px;
+      mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 72%, transparent);
+    }
+    .hero-copy { position: relative; z-index: 2; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--accent);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: var(--accent); }
+    h1 {
+      margin: 23px 0 0;
+      font: 500 clamp(55px, 7.7vw, 104px)/.98 "Manrope", sans-serif;
+      letter-spacing: -.075em;
+    }
+    h1 span { display: block; color: #939b96; }
+    .hero-description {
+      margin: 20px 0 0;
+      color: #a2aaa4;
+      font-size: 13px;
+      line-height: 1.8;
+      letter-spacing: .02em;
+    }
+    .hero-description strong { color: #eef0eb; font-weight: 500; }
+    .hero-actions { display: flex; align-items: center; gap: 25px; margin-top: 25px; }
+    .hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 25px;
+      padding: 13px 17px;
+      background: var(--accent);
+      color: #11150c;
+      font-size: 11px;
+      font-weight: 700;
+      transition: background .2s, transform .2s;
+    }
+    .hero-primary:hover { background: #dcffae; transform: translateY(-2px); }
+    .hero-primary span { font-size: 15px; line-height: .8; }
+    .hero-secondary { color: #b3bbb4; font-size: 11px; transition: color .2s; }
+    .hero-secondary:hover { color: var(--accent); }
+    .car-stage {
+      position: relative;
+      z-index: 1;
+      width: min(1090px, 100%);
+      margin: -68px auto 0;
+      animation: car-arrive 1.1s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .car-stage::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 12%;
+      right: 12%;
+      bottom: 10%;
+      height: 12%;
+      border-radius: 50%;
+      background: #d0e6cc;
+      opacity: .23;
+      filter: blur(48px);
+    }
+    .car-art {
+      display: block;
+      width: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 24px 42px rgba(0,0,0,.28));
+      animation: car-float 6s ease-in-out infinite;
+    }
+    .car-body { fill: var(--car-color); transition: fill .55s ease; }
+    .wheel-spin { transform-box: fill-box; transform-origin: center; animation: wheel-spin 18s linear infinite; }
+    .wheel-detail { fill: #aeb6b1; }
+    .wheel-dark { fill: #171b1c; }
+    .callout {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e6ebe4;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: .11em;
+      white-space: nowrap;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(9,14,11,.69);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 7px 24px rgba(0,0,0,.16);
+      animation: callout-enter .7s .6s both;
+    }
+    .callout::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 13px rgba(200,250,101,.7);
+      animation: dot-pulse 2s infinite;
+    }
+    .callout::after { content: ""; position: absolute;     background: rgba(198,237,134,.58); height: 1px; }
+    .callout-battery { right: 8%; top: 10%; }
+    .callout-battery::after { width: 72px; right: 100%; top: 50%; transform: rotate(150deg); transform-origin: right; }
+    .callout-aero { left: 3%; top: 55%; }
+    .callout-aero::after { width: 85px; left: 100%; top: 50%; transform: rotate(-12deg); transform-origin: left; }
+    .callout-range { right: 8%; bottom: 20%; }
+    .callout-range::after { width: 74px; right: 100%; top: 50%; transform: rotate(-155deg); transform-origin: right; }
+    .scroll-hint {
+      position: absolute;
+      left: 7.2%;
+      bottom: 34px;
+      color: #858d87;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+    .scroll-hint::after {
+      content: "";
+      display: inline-block;
+      width: 35px;
+      height: 1px;
+      margin: 0 0 3px 10px;
+      background: var(--accent);
+      animation: line-pulse 1.8s ease-in-out infinite;
+    }
+    .hero-index { position: absolute; right: 7.2%; bottom: 34px; color: #858d87; font-size: 9px; letter-spacing: .14em; }
+    .hero-index strong { color: #e2e5df; font-weight: 500; }
+    .spec-strip {
+      margin: 0 7.2%;
+      padding: 31px 0 33px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.018) 50%, transparent);
+    }
+    .spec { padding-left: 27px; border-left: 1px solid var(--line); }
+    .spec:first-child { padding-left: 0; border: 0; }
+    .spec-value { font: 600 clamp(22px, 2.6vw, 31px) "Manrope", sans-serif; letter-spacing: -.055em; }
+    .spec-value span { color: var(--accent); }
+    .spec-label { margin-top: 8px; color: #858d87; font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+    .details {
+      padding: 112px 7.2% 118px;
+      display: grid;
+      grid-template-columns: .9fr 1fr;
+      gap: 9%;
+      align-items: center;
+    }
+    .details h2 {
+      max-width: 450px;
+      margin: 18px 0;
+      font: 500 clamp(38px, 4.2vw, 55px)/1.09 "Manrope", sans-serif;
+      letter-spacing: -.055em;
+    }
+    .details h2 span { color: #939b96; }
+    .details-copy { max-width: 405px; color: #9ba09e; font-size: 13px; line-height: 1.85; }
+    .detail-list { border-top: 1px solid var(--line); }
+    .detail-item {
+      display: grid;
+      grid-template-columns: 37px 1fr auto;
+      gap: 13px;
+      align-items: center;
+      padding: 19px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding .2s ease, background .2s ease;
+    }
+    .detail-item:hover { padding-right: 10px; padding-left: 10px; background: rgba(255,255,255,.025); }
+    .detail-number { color: var(--accent); font-size: 10px; letter-spacing: .12em; }
+    .detail-name { font-size: 13px; }
+    .detail-note { color: #818885; font-size: 10px; text-align: right; }
+    .bottom-cta {
+      margin: 0 7.2% 70px;
+      padding: 39px 42px;
+      background: radial-gradient(ellipse at 85% 0%, rgba(198,237,134,.07), transparent 40%), #101512;
+      border: 1px solid rgba(198,237,134,.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .bottom-cta h2 { margin: 0 0 7px; font: 500 24px "Manrope", sans-serif; letter-spacing: -.04em; }
+    .bottom-cta p { margin: 0; color: #929996; font-size: 12px; }
+    .cta-button {
+      flex: 0 0 auto;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 1px;
+      background: var(--accent);
+      color: #11150c;
+      font-size: 10px;
+      letter-spacing: .04em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .cta-button:hover { background: #dcff9f; transform: translateY(-2px); }
+    footer {
+      padding: 22px 7.2%;
+      border-top: 1px solid rgba(255,255,255,.07);
+      display: flex;
+      justify-content: space-between;
+      color: #777e7b;
+      font-size: 10px;
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes car-arrive { from { opacity: 0; transform: translateY(35px) scale(.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes car-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes wheel-spin { to { transform: rotate(360deg); } }
+    @keyframes dot-pulse { 0%, 100% { box-shadow: 0 0 5px rgba(200,250,101,.35); } 50% { box-shadow: 0 0 16px rgba(200,250,101,.9); } }
+    @keyframes line-pulse { 0%, 100% { opacity: .35; transform: scaleX(.75); transform-origin: left; } 50% { opacity: 1; transform: scaleX(1); } }
+    @keyframes callout-enter { from { opacity: 0; } to { opacity: 1; } }
+
+    @media (max-width: 760px) {
+      .topbar { height: 70px; padding: 0 6%; }
+      .brand { font-size: 19px; }
+      .nav-links { gap: 18px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { min-height: 650px; padding: 77px 6% 0; }
+      .hero::before { top: 130px; }
+      .car-stage { width: 112%; max-width: none; margin: 12px 0 0 -6%; }
+      .callout { font-size: 7px; padding: 7px 8px; }
+      .callout-battery { right: 8%; top: 4%; }
+      .callout-aero { left: 4%; top: 54%; }
+      .callout-range { right: 7%; bottom: 17%; }
+      .callout-battery::after { width: 38px; }
+      .callout-aero::after { width: 40px; }
+      .callout-range::after { width: 35px; }
+      .scroll-hint { left: 6%; bottom: 25px; }
+      .hero-index { right: 6%; bottom: 25px; }
+      .spec-strip { margin: 0 6%; grid-template-columns: repeat(2, 1fr); row-gap: 23px; }
+      .spec:nth-child(3) { padding-left: 0; border: 0; }
+      .details { padding: 80px 6%; grid-template-columns: 1fr; gap: 35px; }
+      .bottom-cta { margin: 0 6% 50px; padding: 30px 25px; }
+    }
+    @media (max-width: 460px) {
+      .hero { min-height: 590px; padding-top: 67px; }
+      .hero-description { font-size: 12px; }
+      .hero-actions { gap: 17px; margin-top: 19px; }
+      .hero-primary { gap: 14px; padding: 12px 13px; font-size: 10px; }
+      .hero-secondary { font-size: 10px; }
+      .car-stage { margin-top: 27px; }
+      .callout-aero { top: 52%; }
+      .callout-range { bottom: 15%; }
+      .spec { padding-left: 16px; }
+      .bottom-cta { align-items: flex-start; flex-direction: column; }
+      footer { gap: 16px; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Aeron home">AER<span>O</span>N</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#design">Design</a>
+        <a href="#performance">Performance</a>
+        <a href="#details">Technology</a>
+        <a class="nav-cta" href="#discover">Discover GT</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="design">
+        <div class="hero-copy">
+          <div class="eyebrow">The all-electric grand tourer</div>
+          <h1>Feel the <span>future move.</span></h1>
+          <p class="hero-description"><strong>Meet AERON GT.</strong> Electric at heart. Unmistakably alive.</p>
+          <div class="hero-actions">
+            <a class="hero-primary" href="#discover">Discover the GT <span aria-hidden="true">↗</span></a>
+            <a class="hero-secondary" href="#performance">Explore performance</a>
+          </div>
+        </div>
+
+        <div class="car-stage" aria-label="Animated illustration of the AERON GT electric vehicle">
+          <div class="callout callout-battery">800V ULTRA-FAST CHARGING</div>
+          <div class="callout callout-aero">ACTIVE AERODYNAMICS</div>
+          <div class="callout callout-range">510 MI EST. RANGE</div>
+          <svg class="car-art" viewBox="0 0 1000 430" role="img" aria-labelledby="car-title car-description">
+            <title id="car-title">AERON GT electric grand tourer</title>
+            <desc id="car-description">A sculpted sage-green electric sports car with illuminated headlights and animated wheels.</desc>
+            <defs>
+              <linearGradient id="paint" x1="0" x2="0.83" y1="0" y2="1">
+                <stop offset="0" stop-color="#d5dfd5"/>
+                <stop offset=".28" stop-color="#a8bbac"/>
+                <stop offset=".72" stop-color="#758b7e"/>
+                <stop offset="1" stop-color="#465b52"/>
+              </linearGradient>
+              <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#405550"/>
+                <stop offset="1" stop-color="#131a1b"/>
+              </linearGradient>
+              <linearGradient id="ground" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="transparent"/>
+                <stop offset=".25" stop-color="#bdd0be"/>
+                <stop offset=".75" stop-color="#bdd0be"/>
+                <stop offset="1" stop-color="transparent"/>
+              </linearGradient>
+              <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="8"/>
+              </filter>
+            </defs>
+            <ellipse cx="505" cy="365" rx="370" ry="12" fill="url(#ground)" opacity=".2"/>
+            <path d="M176 286 Q188 262 230 244 L337 217 Q392 147 481 129 Q550 114 641 131 Q715 145 784 206 L875 233 Q917 249 926 281 L919 312 Q911 330 876 333 L157 333 Q124 329 125 308 L129 286 Q139 276 176 286Z" fill="#cfdbcf" opacity=".11" filter="url(#glow)"/>
+            <path d="M176 286 Q188 262 230 244 L337 217 Q392 147 481 129 Q550 114 641 131 Q715 145 784 206 L875 233 Q917 249 926 281 L919 312 Q911 330 876 333 L157 333 Q124 329 125 308 L129 286 Q139 276 176 286Z" fill="url(#paint)" stroke="#e1e8dc" stroke-opacity=".65" stroke-width="2"/>
+            <path d="M355 211 Q410 150 484 138 Q547 128 630 144 Q692 156 759 211 L633 211 L608 171 Q551 151 490 159 Q434 166 398 211Z" fill="url(#glass)" stroke="#d6e0d7" stroke-opacity=".35" stroke-width="2"/>
+            <path d="M510 157 Q555 150 602 164 L626 209 L510 209Z" fill="#141b1c" opacity=".65"/>
+            <path d="M620 151 Q692 164 741 209 L644 209Z" fill="#d3ded5" opacity=".08"/>
+            <path d="M383 218 L759 218" stroke="#e7eee6" stroke-opacity=".34" stroke-width="2"/>
+            <path d="M630 219 L622 274" stroke="#eaf0e8" stroke-opacity=".3" stroke-width="1.5"/>
+            <path d="M773 222 L861 247 Q878 252 886 267 L831 267 Q809 243 772 242Z" fill="#76897c" stroke="#d8e1d8" stroke-opacity=".35"/>
+            <path d="M135 286 Q166 272 207 278 L214 288 Q185 292 132 301Z" fill="#f5f2dc"/>
+            <path d="M141 284 Q168 276 202 281" stroke="#fff9db" stroke-width="3" filter="url(#glow)" opacity=".72"/>
+            <path d="M832 272 Q876 270 915 282 L910 291 Q872 284 836 287Z" fill="#ed654f"/>
+            <path d="M846 272 Q882 273 910 282" stroke="#ff6b55" stroke-width="3" filter="url(#glow)" opacity=".7"/>
+            <path d="M248 252 Q316 239 364 244" fill="none" stroke="#edf2ea" stroke-opacity=".29" stroke-width="2"/>
+            <path d="M267 253 L280 269 L308 269" fill="none" stroke="#35463e" stroke-width="2"/>
+            <path d="M653 244 Q710 234 762 247" fill="none" stroke="#edf2ea" stroke-opacity=".25" stroke-width="2"/>
+            <path d="M434 217 L451 217 M644 217 L660 217" stroke="#c9d5cb" stroke-width="2" stroke-linecap="round"/>
+            <path d="M128 305 Q500 320 918 302 L915 320 Q899 335 872 337 L157 337 Q129 332 128 319Z" fill="#26332e" opacity=".8"/>
+            <g class="wheel-spin">
+              <circle cx="291" cy="316" r="59" fill="#090c0d"/>
+              <circle cx="291" cy="316" r="48" fill="#202526" stroke="#738079" stroke-width="2"/>
+              <circle cx="291" cy="316" r="36" fill="#111617" stroke="#a2ada5" stroke-width="1.5"/>
+              <path class="wheel-detail" d="M288 281 L294 281 L298 309 L291 316 L284 309Z"/>
+              <path class="wheel-detail" d="M326 313 L326 319 L298 323 L291 316 L298 309Z"/>
+              <path class="wheel-detail" d="M294 351 L288 351 L284 323 L291 316 L298 323Z"/>
+              <path class="wheel-detail" d="M256 319 L256 313 L284 309 L291 316 L284 323Z"/>
+              <circle cx="291" cy="316" r="9" fill="#909b93"/>
+              <circle cx="291" cy="316" r="4" fill="#303a35"/>
+            </g>
+            <g class="wheel-spin">
+              <circle cx="773" cy="316" r="59" fill="#090c0d"/>
+              <circle cx="773" cy="316" r="48" fill="#202526" stroke="#738079" stroke-width="2"/>
+              <circle cx="773" cy="316" r="36" fill="#111617" stroke="#a2ada5" stroke-width="1.5"/>
+              <path class="wheel-detail" d="M770 281 L776 281 L780 309 L773 316 L766 309Z"/>
+              <path class="wheel-detail" d="M808 313 L808 319 L780 323 L773 316 L780 309Z"/>
+              <path class="wheel-detail" d="M776 351 L770 351 L766 323 L773 316 L780 323Z"/>
+              <path class="wheel-detail" d="M738 319 L738 313 L766 309 L773 316 L766 323Z"/>
+              <circle cx="773" cy="316" r="9" fill="#909b93"/>
+              <circle cx="773" cy="316" r="4" fill="#303a35"/>
+            </g>
+            <path d="M345 314 Q353 256 291 256 Q231 256 237 314 M827 314 Q833 256 773 256 Q713 256 719 314" fill="none" stroke="#dce5db" stroke-opacity=".65" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="scroll-hint">Scroll to explore</div>
+        <div class="hero-index"><strong>01</strong> / 04</div>
+      </section>
+
+      <section class="spec-strip" id="performance" aria-label="Vehicle performance">
+        <div class="spec reveal"><div class="spec-value">2.8<span>s</span></div><div class="spec-label">0—60 mph</div></div>
+        <div class="spec reveal"><div class="spec-value">510<span> mi</span></div><div class="spec-label">Estimated range</div></div>
+        <div class="spec reveal"><div class="spec-value">200<span> mph</span></div><div class="spec-label">Top speed</div></div>
+        <div class="spec reveal"><div class="spec-value">800<span> V</span></div><div class="spec-label">Charging system</div></div>
+      </section>
+
+      <section class="details" id="details">
+        <div class="reveal">
+          <div class="eyebrow">Every detail, in motion</div>
+          <h2>Designed to go further. <span>In every way.</span></h2>
+          <p class="details-copy">AERON GT brings together a flowing, wind-shaped silhouette and the next generation of electric performance. Every curve has a purpose. Every journey feels different.</p>
+        </div>
+        <div class="detail-list reveal">
+          <div class="detail-item"><span class="detail-number">01</span><span class="detail-name">Sculpted aero profile</span><span class="detail-note">Drag coefficient 0.21</span></div>
+          <div class="detail-item"><span class="detail-number">02</span><span class="detail-name">Dual-motor AWD</span><span class="detail-note">Instant torque, all wheels</span></div>
+          <div class="detail-item"><span class="detail-number">03</span><span class="detail-name">Adaptive air suspension</span><span class="detail-note">Comfort meets control</span></div>
+          <div class="detail-item"><span class="detail-number">04</span><span class="detail-name">Panoramic glass canopy</span><span class="detail-note">A wider point of view</span></div>
+        </div>
+      </section>
+
+      <section class="bottom-cta reveal" id="discover">
+        <div>
+          <h2>Your next chapter starts here.</h2>
+          <p>Discover a new kind of grand touring.</p>
+        </div>
+        <a class="cta-button" href="#performance">Explore AERON GT <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer><a class="brand" href="#" aria-label="Aeron home">AER<span>O</span>N</a><span>Electric, with feeling. &copy; 2026 AERON MOTORS</span></footer>
+  </div>
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  </script>
+</body>
+</html>
